@@ -1,0 +1,9 @@
+-   become: yes
+    hosts: all
+    serial: 1
+    gather_facts: yes
+    tasks:
+        - user:
+            name: "user{{item+31}}"
+            state: present
+          loop: "{{ range(5) | list }}"  
