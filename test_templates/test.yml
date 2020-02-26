@@ -1,0 +1,20 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    max: 25
+  tasks:
+    - name: creer un fichier texte
+      template:
+        src: test.j2
+        dest: /home/eni/ansible/test_templates/users.yml
+- name:
+  become: yes
+  hosts: mh2
+  gather_facts: no
+  vars_files:
+    - users.yml
+  tasks:
+    - user:
+        name: "{{item}}"
+        state: present
+      loop: "{{users}}"          
