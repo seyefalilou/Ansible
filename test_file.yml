@@ -1,0 +1,13 @@
+- hosts: localhost
+  gather_facts: no
+  become: no
+  tasks:
+    - name: block in file
+      blockinfile:
+          path: /home/eni/ansible/test.conf # required. The file to modify.,Before 2.3 this option was only usable as I(dest), I(destfile) and I(name).
+          marker: ; {mark} ANSIBLE BLOCK by seye
+          insertafter: '^#Listen '
+          block: |
+                Listen 8080
+                Directory /
+        
