@@ -1,0 +1,22 @@
+- name: creation d'un fichier de 1Go dans /
+  hosts: localhost
+  gather_facts: no
+  tasks: 
+    - command: dd if=/dev/zero of=/home/eni/ansible/grosFichier bs=1M count=1024
+
+- name: copie d'un fichier de 1Go dans /
+  hosts: mh1
+  become: yes
+  tasks: 
+    - copy:
+        src: grosFichier
+        dest: /grosFichier
+      when: item.mount == "/"  and item.size_available > 1024**3
+      loop: "{{ansible_facts['mounts']}}" 
+- name: suppression d'un fichier
+  hosts: localhost
+  gather_facts: no
+  tasks: 
+    - file:
+        path: /home/eni/ansible/grosFichier
+        state: absent      

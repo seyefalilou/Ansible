@@ -1,0 +1,10 @@
+- hosts: mh1
+  gather_facts:
+  tasks:
+    - service:
+        state: started
+        name: "{{item}}"
+        enabled: yes          
+      loop:
+        - httpd
+        - firewalld

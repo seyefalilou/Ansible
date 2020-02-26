@@ -1,0 +1,15 @@
+- hosts: mh1
+  gather_facts: no
+  vars:
+     users:
+        bob:
+            name: Bob hall
+            abilitation: confidential
+        alice:
+            name: Alice caroll
+            abilitation: top secret
+  tasks:
+     - debug:
+         msg: The name of {{item.key}} is {{item.value.name}} and is {{item.value.abilitation}}
+       loop: "{{ users | dict2items }}"
+        
