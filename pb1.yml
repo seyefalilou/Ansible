@@ -1,0 +1,10 @@
+---
+- name: affichage d'un fait ansible
+  hosts: 
+    - groupe1
+    - groupe2
+  tasks:
+    - name: le fait 'ansible_userspace_bits'
+      debug:
+        var: ansible_userspace_bits
+      

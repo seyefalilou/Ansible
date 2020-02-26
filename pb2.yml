@@ -1,0 +1,36 @@
+- name: 1er Play
+  hosts: mh1
+  become: yes
+  tasks: 
+    - name: installer apache (chez red hat appelé httpd)
+      yum: 
+        name: httpd
+        state: present
+    - name: activer le service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: ouvrir le port
+      firewalld:  
+        service: http
+        state: enabled
+        immediate: yes
+        permanent: yes
+    - name: page d'accueil
+      copy:
+        content: "coucou"
+        dest: /var/www/html/index.html  
+
+
+- name: tester le site
+  hosts: localhost
+  tasks:
+    - name: charger la page d'accueil
+      uri: 
+        url: http://mh1
+        return_content: yes
+      register: res
+    - debug:
+        var: res.content    
+        

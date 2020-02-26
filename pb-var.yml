@@ -1,0 +1,9 @@
+- hosts: all
+  gather_facts: o
+  vars_files:
+    - variables.yml
+             
+
+  tasks: 
+    - debug:
+        var: var1

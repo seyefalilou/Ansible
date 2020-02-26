@@ -1,0 +1,13 @@
+- hosts: mh1
+  become: yes
+  vars:
+    - user: SEYE
+  tasks:
+    - user:
+        name: "{{user}}"
+        state: present
+    - copy:
+        dest: /home/{{user}}/welcome.txt
+        content: |
+           Bienvenue {{user}}
+           Vous utilisez le système {{ansible_facts['fqdn']}}    

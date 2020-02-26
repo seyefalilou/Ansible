@@ -1,0 +1,6 @@
+users:
+    - prenom: bruno
+      nom: dubois
+    - prenom: christian
+      nom: soucet
+simple: 123 
