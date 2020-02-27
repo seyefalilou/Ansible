@@ -1,0 +1,24 @@
+---
+
+# PKI related packages
+pki_packages:
+  - openssl
+  - ca-certificates
+
+# PKI private key directory
+pki_directory: /etc/pki/tls/private
+
+# Bundle of certificate authorities
+pki_ca_bundle: /etc/ssl/certs/ca-bundle.crt
+
+# snakeoil certificate
+pki_snakeoil:
+  pkey: '{{ pki_directory }}/ssl-cert-snakeoil/privkey.pem'
+  cert: '{{ pki_directory }}/ssl-cert-snakeoil/cert.pem'
+
+# PKI directories
+pki_directories:
+  - path: '{{ pki_directory }}'
+    owner: root
+    group: root
+    mode: '0711'

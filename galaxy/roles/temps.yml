@@ -1,0 +1,13 @@
+- hosts: mh2
+  become: yes
+  roles:
+    -   role: rhel-system-roles.timesync
+        timesync_ntp_servers:
+            - hostname: dc1-na.form-nantes.local
+              iburst: yes  
+  tasks:
+            -   command: chronyc tracking
+                register: res
+
+            -   debug:
+                    var: res      

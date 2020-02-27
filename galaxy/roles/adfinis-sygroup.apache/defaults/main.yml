@@ -1,0 +1,93 @@
+---
+
+# listen ip for vhosts
+apache_listen_ip: '*'
+# listen port for non-ssl vhosts
+apache_listen_port: 80
+# listen port vor ssl vhosts
+apache_listen_port_ssl: 443
+
+# apache version to distinguish access control directives
+apache_vhosts_version: '2.4'
+# vhost configuration file, created on the ansible host
+apache_vhosts_filename: 'vhosts.conf'
+# vhost configuration template in the ansible 'templates' directory
+apache_vhosts_template: 'vhosts.conf.j2'
+
+# default allow_override setting to allow overrides in .htaccess
+apache_allow_override: 'All'
+# default apache options, overridden in vhosts config below
+apache_options: '-Indexes +FollowSymLinks'
+
+# settings for all vhosts
+apache_global_vhost_settings: |
+  DirectoryIndex index.php index.html
+
+# list of vhosts, localhost enabled by default
+#
+# required vhost vars:
+#  - servername
+#
+# optional vhost vars:
+#  - serveralias
+#  - documentroot
+#  - redirect_ssl
+#  - options
+apache_vhosts:
+    # vhost name (required)
+  - servername: 'localhost'
+    # # vhost alias, alternative name for the host (optional)
+    # server admin email
+    serveradmin: 'www-admin@foo.example.com'
+    # serveralias: 'localhost'
+    # document root, main document tree (optional)
+    documentroot: '/var/www/html'
+    # # redirect to SSL enabled vhost below (optional)
+    # redirect_ssl: false
+    # If you don't have an listen_ip configured, you can manually set the vhost to redirect to here
+    #redirect_ssl_vhost: 'https://example.com'
+    # # vhost options, override 'apache_options' (optional)
+    # options: '+FollowSymLinks'
+    # add directives not covered by any variables
+    #   extra_options: |
+
+# ssl vhosts, none by default
+apache_vhosts_ssl: []
+#    # vhost name (required)
+#  - servername: 'localhost'
+#    # server admin email
+#    serveradmin: 'www-admin@foo.example.com'
+#    # document root, main document tree (optional)
+#    documentroot: '/var/www/html'
+#    # certificate file (required)
+#    certificate_file: '/etc/ssl/certs/wildcard_chain.crt'
+#    # certificate key (required)
+#    certificate_key_file: '/etc/ssl/private/adfinis-sygroup.ch.key'
+#    # certificate chain (optional, deprecated)
+#    certificate_chain_file: '/etc/ssl/certs/chain.pem'
+#    # add directives not covered by any variables
+#    extra_options: |
+
+# allowed ssl protocol versions
+apache_ssl_protocol: 'All -SSLv2 -SSLv3'
+# allowed cipher suites
+apache_ssl_cipher_suite: 'AES256+EECDH:AES256+EDH'
+
+# apache mods for debian based distros
+apache_mods_enabled:
+  - rewrite.load
+  - ssl.load
+apache_mods_disabled: []
+
+# Set initial apache state. Recommended values: `started` or `stopped`
+apache_state: started
+
+# Apache package state; use `present` to make sure it's installed, or `latest`
+# if you want to upgrade or switch versions using a new repo.
+apache_packages_state: present
+
+# additional packages to install (defaults to an empty list)
+# example to install the openidc module:
+#apache_additional_packages:
+#  - mod_auth_openidc
+apache_additional_packages: []

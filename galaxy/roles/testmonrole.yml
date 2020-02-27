@@ -1,0 +1,6 @@
+- hosts: mh2
+  gather_facts: no
+  become: yes
+  roles:
+    - role: monrole
+      nameService: apache2

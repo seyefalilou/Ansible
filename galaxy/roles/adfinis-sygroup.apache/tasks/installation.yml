@@ -1,0 +1,14 @@
+---
+
+- name: update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == 'Debian'
+
+- name: install apache related packages
+  package:
+    state: present
+  loop:
+    - '{{ apache_packages }}'
+    - '{{ apache_additional_packages }}'

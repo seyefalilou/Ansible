@@ -1,0 +1,12 @@
+mh1
+mh2
+
+
+[groupe1]
+mh1
+
+[groupe2]
+mh2
+[groupes:children]
+groupe1
+groupe2

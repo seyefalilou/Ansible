@@ -1,0 +1,19 @@
+---
+# tasks file for monrole
+- name: install apache
+  yum:
+    name: "{{namePackage}}"
+    state: present
+- name: activer 
+  service:
+    name: "{{nameService}} "    
+    state: started
+    enabled: yes
+- name: firewalld
+  firewalld:
+    state: enabled
+    immediate: yes
+    permanent: yes
+    service: http      
+
+

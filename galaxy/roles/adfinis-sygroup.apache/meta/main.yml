@@ -1,0 +1,25 @@
+---
+
+dependencies:
+  - role: adfinis-sygroup.pki
+
+galaxy_info:
+  role_name: apache
+  author: 'Adfinis SyGroup AG'
+  description: 'Install and manage apache'
+  company: 'Adfinis SyGroup AG'
+  license: 'GNU General Public License v3'
+  min_ansible_version: '2.0.0'
+  platforms:
+    - name: Debian
+      versions:
+        - stretch
+    - name: EL
+      versions:
+        - 7
+  galaxy_tags:
+    - apache
+    - webserver
+    - http
+    - httpd
+    - proxy
